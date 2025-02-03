@@ -45,44 +45,38 @@ export default function PaymentPage() {
           // heshDesc: "[0~Item 1~1~8][0~Item 2~2~1]",
           // Pritim: "True",
           // PageLang: "HEB",
-          tmp: "1",
+          tmp: "7",
         },
       });
       console.log(signResponse);
+      console.log(signResponse.data);
 
-      return signResponse.data.Sign;
+      return signResponse.data;
     } catch (err) {
       console.log(err);
       throw new Error("Failed to generate signature");
     }
   };
 
-  // const handlePayment = async () => {
-  //   setLoading(true);
-  //   setError("");
-  //   try {
-  //     const signature = await getSignature();
-  //     const response = await axios.post(PAYMENT_API_URL, {
-  //       Masof,
-  //       KEY,
-  //       sum: amount,
-  //       email,
-  //       Sign: signature,
-  //       // Additional parameters as required by YaadPay
-  //     });
+  const handlePayment = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const signature = await getSignature();
+      const response = await axios.get("/api/", { params: signature });
 
-  //     if (response.data.redirectUrl) {
-  //       window.location.href = response.data.redirectUrl;
-  //     } else {
-  //       throw new Error("Invalid response from server");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //     setError("Payment failed. Please try again.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+      if (response.data.redirectUrl) {
+        window.location.href = response.data.redirectUrl;
+      } else {
+        throw new Error("Invalid response from server");
+      }
+    } catch (err) {
+      console.log(err);
+      setError("Payment failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
@@ -108,7 +102,7 @@ export default function PaymentPage() {
           />
         </div>
         <button
-          onClick={getSignature}
+          onClick={handlePayment}
           className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
           disabled={loading}
         >
@@ -118,3 +112,6 @@ export default function PaymentPage() {
     </div>
   );
 }
+// https://icom.yaad.net/p/?Amount=100&ClientName=matan&Info=test&Masof=0010299529&Order=1&Tash=1&UTF8=True&UTF8out=True&UserId=203269535&action=pay&tmp=7&signature=5bd39062333034e6c841dc64f0feec675d5414badec537f2bd1cdab7abf2bbd6
+
+// action=pay&Amount=100&ClientName=matan&Info=test&Masof=0010299529&Order=1&Tash=1&UTF8=True&UTF8out=True&UserId=203269535&action=pay&tmp=1&signature=a314ad352ec4fcf7809f3870d98081139e993a8c1a99c1afe5459f46f086a755
