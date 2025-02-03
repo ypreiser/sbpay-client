@@ -2,22 +2,19 @@ import { useState } from "react";
 import axios from "axios";
 import { Masof, KEY, PassP } from "../env.ts";
 
-const PAYMENT_API_URL = "https://icom.yaad.net/p/";
-const SIGN_API_URL = "https://icom.yaad.net/p/?action=APISign";
 const Info = "test";
 const UTF8 = "True";
 const UTF8out = "True";
 const UserId = "203269535";
 const ClientName = "matan";
+const Tash = "1";
+const Order = "1";
 
 export default function PaymentPage() {
   const [Amount, setAmount] = useState("100");
-  const [Order, setOrder] = useState("1");
   const [email, setEmail] = useState("t@t.com");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [Tash, setTash] = useState("1");
-  const [tashType, settashType] = useState("1");
 
   const getSignature = async () => {
     try {
@@ -28,33 +25,26 @@ export default function PaymentPage() {
           KEY,
           PassP,
           Masof,
-          Order: "12345678910",
-          Info: "test-api",
-          Amount: "10",
+          Order,
+          Info,
+          Amount,
           UTF8,
           UTF8out,
           UserId,
-          ClientName: "Israel",
-          ClientLName: "Isareli",
-          street: "levanon 3",
-          city: "netanya",
-          zip: "42361",
-          phone: "098610338",
-          cell: "050555555555",
-          email: "test@yaad.net",
-          Tash: "1",
-          FixTash: "False",
-          ShowEngTashText: "False",
-          Coin: "1",
-          Postpone: "False",
-          J5: "False",
-          Sign: "True",
-          MoreData: "True",
-          sendemail: "True",
-          SendHesh: "True",
-          heshDesc: "[0~Item 1~1~8][0~Item 2~2~1]",
-          Pritim: "True",
-          PageLang: "HEB",
+          ClientName,
+          Tash,
+          // FixTash: "False",
+          // ShowEngTashText: "False",
+          // Coin: "1",
+          // Postpone: "False",
+          // J5: "False",
+          // Sign: "True",
+          // MoreData: "True",
+          // sendemail: "True",
+          // SendHesh: "True",
+          // heshDesc: "[0~Item 1~1~8][0~Item 2~2~1]",
+          // Pritim: "True",
+          // PageLang: "HEB",
           tmp: "1",
         },
       });
