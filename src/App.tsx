@@ -1,9 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-
-const Masof = "ENV";
-const KEY = "ENV";
-const PassP = "ENV";
+import { Masof, KEY, PassP } from "../env.ts";
 
 const PAYMENT_API_URL = "https://icom.yaad.net/p/";
 const SIGN_API_URL = "https://icom.yaad.net/p/?action=APISign";
